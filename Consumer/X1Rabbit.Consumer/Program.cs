@@ -19,7 +19,8 @@ namespace X1Rabbit.Consumer
             using var connection = factory.CreateConnection();
             using var channel = connection.CreateModel();
             
-            QueConsumer.Consume(channel, queName);
+            //QueConsumer.Consume(channel, queName);
+            DirectExchangeConsumer.Consume(channel);
         }
 
        

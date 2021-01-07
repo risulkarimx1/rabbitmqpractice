@@ -18,7 +18,8 @@ namespace X1Rabbit.Producer
             using var connection = factory.CreateConnection();
             using var channel = connection.CreateModel();
 
-            QueueProducer.Publish(channel, queName);
+            //QueueProducer.Publish(channel, queName);
+            DirectExchangePublisher.Publish(channel);
         }
     }
 }
