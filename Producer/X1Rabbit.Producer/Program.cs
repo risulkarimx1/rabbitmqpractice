@@ -17,22 +17,8 @@ namespace X1Rabbit.Producer
 
             using var connection = factory.CreateConnection();
             using var channel = connection.CreateModel();
-            channel.QueueDeclare(queName, durable: true, exclusive: false, autoDelete: false, arguments: null);
 
-            int c = 0;
-
-            while (true)
-            {
-                var key =  Console.ReadKey();
-                if(key.Key == ConsoleKey.Escape) break;
-
-                var message = new { Name = "Producer", Message = $"Hello {c++}" };
-                var body = Encoding.UTF8.GetBytes(JsonConvert.SerializeObject(message));
-                channel.BasicPublish("", queName, null, body);
-            }
-
-            
-
+            QueueProducer.Publish(channel, queName);
         }
     }
 }

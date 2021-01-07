@@ -18,19 +18,10 @@ namespace X1Rabbit.Consumer
 
             using var connection = factory.CreateConnection();
             using var channel = connection.CreateModel();
-            channel.QueueDeclare(queName, durable: true, exclusive: false, autoDelete: false, arguments: null);
-
-            var consumer = new EventingBasicConsumer(channel);
-            consumer.Received += (o, eventArgs) => OnMessageReceieved(o, eventArgs);
-            channel.BasicConsume(queName, true, consumer);
-            Console.ReadLine();
+            
+            QueConsumer.Consume(channel, queName);
         }
 
-        private static void OnMessageReceieved(object? sender, BasicDeliverEventArgs e)
-        {
-            var body = e.Body.ToArray();
-            var message = Encoding.UTF8.GetString(body);
-            Console.WriteLine($"message found : {message}");
-        }
+       
     }
 }
