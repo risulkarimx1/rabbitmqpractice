@@ -19,7 +19,8 @@ namespace X1Rabbit.Producer
             using var channel = connection.CreateModel();
 
             //QueueProducer.Publish(channel, queName);
-            DirectExchangePublisher.Publish(channel);
+            //DirectExchangePublisher.Publish(channel);
+            TopicExchangePublisher.Publish(channel);
         }
     }
 }
